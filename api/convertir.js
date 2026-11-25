@@ -1,7 +1,6 @@
-export default async function handler(req, res) {
-
+export default function handler(req, res) {
   res.status(200).json({
-    mensaje: "API SICOR funcionando correctamente"
+    estado: "ok",
+    mensaje: "El servidor SICOR está funcionando"
   });
-
 }

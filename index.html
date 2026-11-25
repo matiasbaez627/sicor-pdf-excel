@@ -4,43 +4,119 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SICOR PDF → Excel</title>
+
 <style>
 body{
     font-family: Arial, sans-serif;
-    text-align:center;
-    margin-top:50px;
-    background:#f4f4f4;
+    background:#f5f7fa;
+    margin:0;
 }
+
 .container{
+    max-width:900px;
+    margin:50px auto;
     background:white;
     padding:30px;
-    max-width:700px;
-    margin:auto;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,.1);
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
+
+h1{
+    color:#0070f3;
+}
+
+.upload{
+    border:2px dashed #0070f3;
+    padding:40px;
+    border-radius:10px;
+    margin:20px 0;
+}
+
 button{
     background:#0070f3;
     color:white;
     border:none;
-    padding:12px 20px;
-    border-radius:6px;
+    padding:15px 25px;
+    border-radius:8px;
     cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#0057c2;
+}
+
+.resultado{
+    margin-top:25px;
+    font-weight:bold;
+    color:green;
+}
+
+select{
+    padding:10px;
+    width:100%;
+    margin-top:10px;
 }
 </style>
+
 </head>
 <body>
 
 <div class="container">
-    <h1>Conversor SICOR PDF → Excel</h1>
-    <p>Subí tu PDF SICOR y conviértelo a Excel.</p>
 
-    <input type="file" accept=".pdf">
+<h1>📄 Conversor SICOR PDF → Excel</h1>
 
-    <br><br>
+<p>
+Subí tu PDF SICOR y elegí cómo querés generar el Excel.
+</p>
 
-    <button>Convertir PDF</button>
+<div class="upload">
+<input id="pdfInput" type="file" accept=".pdf">
 </div>
+
+<p><strong>Distribución de hojas:</strong></p>
+
+<select id="modo">
+    <option>Una sola hoja</option>
+    <option>Separar por Tipo (Factura / Crédito / Débito)</option>
+    <option>Una hoja por página</option>
+</select>
+
+<br><br>
+
+<button onclick="convertir()">
+Convertir PDF
+</button>
+
+<div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+
+function convertir(){
+
+    const archivo =
+        document.getElementById("pdfInput").files[0];
+
+    if(!archivo){
+        alert("Seleccione un PDF");
+        return;
+    }
+
+    const modo =
+        document.getElementById("modo").value;
+
+    document.getElementById("resultado").innerHTML =
+        "✅ PDF cargado: <b>" +
+        archivo.name +
+        "</b><br>Modo seleccionado: <b>" +
+        modo +
+        "</b><br><br>Próximo paso: generar Excel.";
+
+}
+
+</script>
 
 </body>
 </html>
